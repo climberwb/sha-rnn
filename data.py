@@ -1,5 +1,6 @@
 import zipfile
 import torch
+from torch import Torch
 
 def batchify(data, bsz: int):
     data = data.narrow(0, 0, (len(data) // bsz) * bsz)
@@ -15,7 +16,7 @@ class enwik8:
         self.token2idx = {t: i for i, t in enumerate(tokens)}
         self.token2idx[ord('\n')] = 0
         # self.n_token = 256
-
+        bsz = 16
         num_test_chars = 5000000
         cut = -2 * num_test_chars
         self.train_data = self.text_batch(data[:cut], bsz)
