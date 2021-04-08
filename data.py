@@ -1,6 +1,6 @@
 import zipfile
 import torch
-from torch import Torch
+from torch import Tensor
 
 def batchify(data, bsz: int):
     data = data.narrow(0, 0, (len(data) // bsz) * bsz)
