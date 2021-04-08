@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint
-
+import random
 def evaluate(model, crit, batches):
     model.eval()
     hidden = mem = None

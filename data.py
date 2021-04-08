@@ -2,6 +2,7 @@ import zipfile
 import torch
 from torch import Tensor
 device=0
+
 def batchify(data, bsz: int):
     data = data.narrow(0, 0, (len(data) // bsz) * bsz)
     return data.view(bsz, -1).t().contiguous().to(device)
