@@ -31,6 +31,7 @@ def evaluate(model, crit, batches):
     return total_loss / pbar.n
 
 def train(model, crit, optim, sched, dataset, epochs):
+    hid,mem = None,None
     for i in range(epochs):
         model.train()
         batches = dataset.train_data
