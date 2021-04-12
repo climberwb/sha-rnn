@@ -45,8 +45,10 @@ def train(model, crit, optim, sched, dataset, epochs):
             chunk = batches[i:i+1+seq_len]
             x, target = chunk[:-1], chunk[1:]
             i += seq_len
-
-            y, mem, hid = model(x,hid,mem)
+            if hid ==None:
+                y, mem, hid = model(x)
+            else:
+                y, mem, hid = model(x,hid,mem)
             mem = [m.detach() for m in mem ]
             hid = [(h1.detach(),h2.detach()) for h1,h2 in hid ]
 
