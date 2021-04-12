@@ -48,7 +48,7 @@ def train(model, crit, optim, sched, dataset, epochs):
             if hid ==None:
                 y, mem, hid = model(x)
             else:
-                y, mem, hid = model(x,hid,mem)
+                y, mem, hid = model(x,mem, hid)
             mem = [m.detach() for m in mem ]
             hid = [(h1.detach(),h2.detach()) for h1,h2 in hid ]
 
