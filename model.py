@@ -7,7 +7,7 @@ import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint
 
 class Boom(nn.Module):
-    def __init__(self, input_dim, hidden_dim=2048, dropout=0, shortcut=False):
+    def __init__(self, input_dim, hidden_dim=int(2048*2), dropout=0, shortcut=False):
         super().__init__()
         self.ff1 = nn.Linear(input_dim, hidden_dim)
         self.ff2 = nn.Linear(hidden_dim, input_dim) if not shortcut else None

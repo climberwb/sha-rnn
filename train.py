@@ -45,7 +45,10 @@ def train(model, crit, optim, sched, dataset, epochs):
             x, target = chunk[:-1], chunk[1:]
             i += seq_len
 
-            y, _, _ = model(x)
+            y, mem, hid = model(x,hid,mem)
+            mem = [h.detach() for m in mem ]
+            hid = [(h1.detach(),h2.detach()) for h1,h2 in hid ]
+
             loss = crit(y.flatten(end_dim=1), target.flatten())
             # loss = 0
             # for j in range(len(x)):
