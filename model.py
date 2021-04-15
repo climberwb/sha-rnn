@@ -17,8 +17,9 @@ class Boom(nn.Module):
 
     def forward(self, x):
         y = self.dropout(self.activation(self.ff1(x)))
-        if self.ff2 is not None:
-            return self.ff2(y)
+        print("is self.ff2 not None? "+(self.ff2 is not None))
+        # if self.ff2 is not None:
+        #     return self.ff2(y)
         # fix the dimensions (chunk and sum) if we're taking a shortcut
         input_dim = x.shape[-1]
         z = torch.split(y, input_dim, dim=-1)
@@ -41,7 +42,7 @@ class Block(nn.Module):
         self.ln = BlockNorm(input_dim)
         self.dropout = nn.Dropout(dropout)
         self.rnn = nn.LSTM(input_dim, input_dim) if rnn else None
-        self.ff = Boom(input_dim, dropout=dropout, hidden_dim=ff_dim, shortcut=True)
+        self.ff = Boom(input_dim, dropout=dropout, hidden_dim=int(ff_dim*2), shortcut=True)
         self.residual = residual
         self.max_len = max_len
 
