@@ -17,9 +17,8 @@ class Boom(nn.Module):
 
     def forward(self, x):
         y = self.dropout(self.activation(self.ff1(x)))
-        print("is self.ff2 not None? "+str(self.ff2 is not None))
-        # if self.ff2 is not None:
-        #     return self.ff2(y)
+        if self.ff2 is not None:
+            return self.ff2(y)
         # fix the dimensions (chunk and sum) if we're taking a shortcut
         input_dim = x.shape[-1]
         z = torch.split(y, input_dim, dim=-1)
